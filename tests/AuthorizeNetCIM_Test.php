@@ -143,6 +143,22 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
     $this->assertTrue($response->isOk());
 
   }
+
+  public function testGetCustomerProfileByEmail()
+  {
+    $email = "blahlah@domain.com";
+    // Create new customer profile
+    $request = new AuthorizeNetCIM;
+    $customerProfile = new AuthorizeNetCustomer;
+    $customerProfile->description = "Description of customer";
+    $customerProfile->merchantCustomerId = time().rand(1,10);
+    $customerProfile->email = $email;
+    $response = $request->createCustomerProfile($customerProfile);
+    $this->assertTrue($response->isOk());
+    $response = $request->getCustomerProfileByEmail($email);
+    $this->assertTrue($response->isOk());
+  }
+
 /*
  * test case added for: Invalid child element in PHP CIM SDK when updating payment profile.
  * 02/24/2014

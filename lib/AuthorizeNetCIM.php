@@ -173,7 +173,7 @@ class AuthorizeNetCIM extends AuthorizeNetRequest
         $this->_constructXml("getCustomerProfileIdsRequest");
         return $this->_sendRequest();
     }
-    
+
     /**
      * Get a customer profile.
      *
@@ -185,6 +185,21 @@ class AuthorizeNetCIM extends AuthorizeNetRequest
     {
         $this->_constructXml("getCustomerProfileRequest");
         $this->_xml->addChild("customerProfileId", $customerProfileId);
+        return $this->_sendRequest();
+    }
+
+    /**
+     * Get a customer profile by email.
+     *
+     * @param string $email
+     *
+     * @return AuthorizeNetCIM_Response
+     */
+    public function getCustomerProfileByEmail($email)
+    {
+        $this->_constructXml("getCustomerProfileRequest");
+        $this->_xml->addChild("email", $email);
+
         return $this->_sendRequest();
     }
     
